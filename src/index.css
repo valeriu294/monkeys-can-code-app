@@ -1,68 +1,91 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-yellow-100 to-orange-100;
+    font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
   }
-  a:hover {
-    color: #747bff;
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 12px;
   }
-  button {
-    background-color: #f9f9f9;
+
+  ::-webkit-scrollbar-track {
+    @apply bg-yellow-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-yellow-400 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-yellow-500;
+  }
+}
+
+@layer components {
+  /* Primary glossy button */
+  .btn-primary {
+    @apply relative px-8 py-4 bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 
+           text-white font-bold rounded-full transition-all duration-300 
+           transform hover:scale-105 shadow-2xl overflow-hidden;
+  }
+
+  /* Glossy card style */
+  .card {
+    @apply bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 
+           border-4 border-yellow-400 relative overflow-hidden;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/20 backdrop-blur-lg border border-white/30 shadow-xl;
+  }
+
+  /* Glossy input */
+  .input-glossy {
+    @apply bg-white/90 backdrop-blur-sm border-4 border-yellow-300 
+           rounded-2xl px-6 py-4 text-lg focus:outline-none 
+           focus:border-yellow-500 focus:ring-4 focus:ring-yellow-200 
+           shadow-lg transition-all;
+  }
+
+  /* Shine animation effect */
+  @keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .shine-effect {
+    animation: shine 3s infinite;
+  }
+}
+
+@layer utilities {
+  /* Custom delay utilities for animations */
+  .delay-75 {
+    animation-delay: 75ms;
+  }
+  
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  /* Text gradient utilities */
+  .text-gradient-yellow {
+    @apply bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent;
+  }
+
+  /* Custom shadows */
+  .shadow-glossy {
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.1),
+      0 1px 8px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
   }
 }

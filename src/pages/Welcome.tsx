@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Banana, Sparkles } from 'lucide-react';
+import { Banana, Sparkles, Rocket } from 'lucide-react';
 
 interface WelcomeProps {
   onStart: () => void;
@@ -7,76 +7,122 @@ interface WelcomeProps {
 
 export const Welcome = ({ onStart }: WelcomeProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-screen flex items-center justify-center p-4"
-    >
-      <div className="card max-w-2xl w-full text-center relative overflow-hidden">
-        
-        <div className="absolute inset-0 pointer-events-none">
-          {Array(5).fill(0).map((_, i) => (
+    // Yellow gradient background
+    <div className="min-h-screen bg-gradient-to-br from-yellow-200 via-orange-100 to-yellow-300 flex items-center justify-center p-4">
+      
+      {/* Centered card container */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-3xl w-full"
+      >
+        {/* Main glossy card */}
+        <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-10 border-4 border-yellow-400 relative overflow-hidden">
+          
+          {/* Glossy overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent pointer-events-none"></div>
+          
+          {/* Floating bananas background */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+            {Array(8).fill(0).map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -30, 0],
+                  rotate: [0, 15, -15, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                }}
+              >
+                <Banana 
+                  size={50} 
+                  className="text-yellow-400 opacity-20" 
+                />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Content - centered */}
+          <div className="relative z-10 text-center">
+            
+            {/* Rotating sparkle icon */}
             <motion.div
-              key={i}
-              className="absolute"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -20, 0],
-                rotate: [0, 10, -10, 0],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: i * 0.2,
-              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              className="inline-block mb-6"
             >
-              <Banana 
-                size={40} 
-                className="text-banana opacity-20" 
-              />
+              <div className="p-4 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full shadow-lg">
+                <Sparkles size={56} className="text-white" />
+              </div>
             </motion.div>
-          ))}
+
+            {/* 
+              🖼️ IMAGE PLACEHOLDER 2: Welcome Screen Logo
+              Add your custom image here:
+              <img src="/welcome-monkey.png" alt="Welcome" className="w-48 mx-auto mb-6" />
+            */}
+
+            {/* Main heading */}
+            <h1 className="text-7xl font-black mb-6 bg-gradient-to-r from-yellow-600 via-orange-500 to-yellow-600 bg-clip-text text-transparent leading-tight">
+              🐵 Monkeys Can Code! 🍌
+            </h1>
+
+            {/* Subtitle with glossy background */}
+            <div className="inline-block px-8 py-4 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-2xl shadow-lg mb-8 border-2 border-yellow-300">
+              <p className="text-3xl text-gray-800 font-bold">
+                Learn to code while having fun!
+              </p>
+            </div>
+
+            {/* Description */}
+            <p className="text-xl text-gray-700 mb-10 max-w-xl mx-auto leading-relaxed">
+              Join the monkey troop and swing through coding challenges! From beginner to expert, we've got bananas for everyone! 🌴
+            </p>
+
+            {/* Glossy start button */}
+            <motion.button
+              whileHover={{ 
+                scale: 1.08,
+                boxShadow: "0 25px 50px rgba(0,0,0,0.25)"
+              }}
+              whileTap={{ scale: 0.95 }}
+              onClick={onStart}
+              className="relative px-14 py-6 bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-500 text-white text-3xl font-black rounded-full shadow-2xl overflow-hidden group"
+            >
+              {/* Shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+              
+              <span className="relative z-10 flex items-center justify-center gap-3">
+                <Rocket size={32} className="animate-bounce" />
+                Start Your Adventure!
+                <Banana size={32} className="animate-bounce delay-75" />
+              </span>
+            </motion.button>
+
+            {/* Fun fact */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-10 p-5 bg-yellow-50/80 rounded-xl border-2 border-yellow-200"
+            >
+              <p className="text-sm text-gray-600 font-medium">
+                💡 <span className="font-bold">Did you know?</span> Monkeys are super smart... just like YOU! 🧠
+              </p>
+            </motion.div>
+          </div>
         </div>
-
-        <div className="relative z-10">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="inline-block mb-4"
-          >
-            <Sparkles size={48} className="text-banana-dark" />
-          </motion.div>
-
-          <h1 className="text-6xl font-bold text-monkey-dark mb-4">
-            🐵 Monkeys Can Code! 🍌
-          </h1>
-
-          <p className="text-2xl text-gray-700 mb-8">
-            Learn to code while having fun!
-          </p>
-
-          <p className="text-lg text-gray-600 mb-12">
-            Join the monkey troop and swing through coding challenges! 🌴
-          </p>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={onStart}
-            className="btn-primary text-xl"
-          >
-            🍌 Start Your Adventure!
-          </motion.button>
-
-          <p className="text-sm text-gray-500 mt-8">
-            Did you know? Monkeys are super smart... just like YOU! 🧠
-          </p>
-        </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 };
